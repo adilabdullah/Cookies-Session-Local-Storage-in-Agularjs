@@ -1,0 +1,112 @@
+<!DOCTYPE html> 
+<html> 
+
+<head> 
+	<title> 
+		A Simple example of Get, 
+	Set and Clear Cookie in AngularJS 
+	</title> 
+</head> 
+
+<body> 
+	<center> 
+		<h1 style="color:green">Adil Abdullah</h1> 
+		<h2>set, get and clear cookies, session and local storage in AngularJs</h2> 
+		<script type="text/javascript"
+				src= 
+"https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"> 
+		</script> 
+		<script type="text/javascript"
+				src= 
+"https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.js"> 
+		</script> 
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
+		<script type="text/javascript"> 
+			var app = 
+				angular.module('MyApp', ['ngCookies','ngStorage']); 
+
+			app.controller('CookiesController', function( 
+				$scope, $window, $cookies,$sessionStorage,$localStorage) { 
+                                  $scope.cookieValue=$cookies.get("username");
+console.log($scope.cookieValue); 
+				$scope.SetCookies = function() { 
+					$cookies.put("username", $scope.username); 
+
+				}; 
+
+				$scope.GetCookies = function() { 
+					$scope.cookieValue=$cookies.get("username"); 
+				}; 
+
+				$scope.ClearCookies = function() { 
+					$cookies.remove("username"); 
+				}; 
+
+	$scope.addSession = function() { 
+					$sessionStorage.session_name="adil abdullah"; 
+                                  $sessionStorage.session_city="Karachi";
+				}; 
+
+       $scope.fetchSession = function() { 
+                                    $scope.session_name=$sessionStorage.session_name;
+                                      $scope.session_city=$sessionStorage.session_city;
+				};
+
+        $scope.addLocalStorage = function() { 
+					$localStorage.local_name="bilal abdullah"; 
+                                  $localStorage.local_city="Dubai";
+				}; 
+
+       $scope.fetchLocalStorage = function() { 
+                                    $scope.local_name=$localStorage.local_name;
+                                      $scope.local_city=$localStorage.local_city;
+				};
+
+
+			}); 
+		</script> 
+		<div ng-app="MyApp" ng-controller="CookiesController"> 
+		<h3>Cookies</h3><br> 
+			Username: 
+			<input type="text"
+				ng-model="username" /> 
+			<br /> 
+			<br /> 
+		
+			<input type="button"
+				value="Set Cookies"
+				ng-click="SetCookies()" /> 
+
+			<input type="button"
+				value="Get Cookies"
+				ng-click="GetCookies()" /> 
+
+			<input type="button"
+				value="Clear Cookies"
+				ng-click="ClearCookies()" />
+<p>{{cookieValue}}</p><br>
+	<h3>Session</h3><br> 
+<input type="button"
+				value="Set Session"
+				ng-click="addSession()" />
+
+<input type="button"
+				value="Get Session"
+				ng-click="fetchSession()" /> 
+<p>{{session_name}}</p>
+<p>{{session_city}}</p><br>
+	<h3>Local Storage</h3><br> 
+<input type="button"
+				value="Set Local Storage"
+				ng-click="addLocalStorage()" />
+
+<input type="button"
+				value="Get Local Storage"
+				ng-click="fetchLocalStorage()" /> 
+<p>{{local_name}}</p>
+<p>{{local_city}}</p>
+		</div> 
+	</center> 
+</body> 
+
+</html>
